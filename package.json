@@ -1,0 +1,20 @@
+{
+  "name": "beef_api",
+  "version": "0.0.0",
+  "description": "User can create log in and review inventory",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeCatalyser/beef_API.git"
+  },
+  "author": "Luisa Salcedo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeCatalyser/beef_API/issues"
+  },
+  "homepage": "https://github.com/LeCatalyser/beef_API#readme"
+}
