@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/LeCatalyser/beef_API/issues"
   },
-  "homepage": "https://github.com/LeCatalyser/beef_API#readme"
+  "homepage": "https://github.com/LeCatalyser/beef_API#readme",
+  "dependencies": {
+    "mocha": "^3.4.2"
+  }
 }
