@@ -1,4 +1,4 @@
-//data layer of the application
+//data layer ( database) of the application
 const mongoose = require("mongoose"); //cooks my order. Mongo will be my single source of truth
 
 const cutSchema = mongoose.Schema({

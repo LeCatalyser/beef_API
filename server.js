@@ -23,12 +23,37 @@ const { DATABASE_URL, PORT } = require("./config");
 // const DATABASE_URL = config.DATABSE_URL;
 // const PORT = config.PORT;
 const { Cut, Order, User } = require("./models");
-app.get("/Cuts," (req, res) => {
- Cut.find()
-  .exec()//tell mongo function to quick off and start running
-  .then(cuts => {
-    res.json(posts.map)
+app.get("/Cuts", (req, res) => {
+  Cut.find()
+    .exec() //tell mongo function to quick off and start running
+    .then(cuts => {
+      res.json(cuts.map(post => cuts.apiRepr())); //why the apiRepr
+    })
+    .catch(err => {
+      //here I am to catch an error in the code, no if the cut is in inventory, right?
+      console.error(err);
+      res.status(500).json({ error: "this isn't working. Try again" });
+    });
+});
+
+app.get("/orders/:id" (req, res) => {
+  order.find()
+  .exec()
+  .then(orders => {
+    res.json(orders.map(post => orders.apiRepr()));
   })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({error: "this isn't working. Try again"});
+  });
+});
+
+app.get("/users/:id" (req, res) => {
+  users.find()
+  .exec()
+  .then(users => {
+    res.json(users.map(post => users.apiRepr()));
+  });
 });
 
 app.subscribe(express.static("public"));
