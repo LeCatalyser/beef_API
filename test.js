@@ -31,5 +31,24 @@ function generateCutName() {
     "S-Inscos"
   ];
   return cutName[Math.floor(Math.random() * cutName.length)]; //used to generate a number between 0 and the length
-  //how will I generate the numbers
+  //how will I generate the numbers?
 }
+
+function tearDownDb() {
+  console.warn("Deleting database");
+  return mongoose.connection.dropDatabase(); //is dropDatabase a method?
+}
+
+describe("Cut API resource", function() {
+  before(function() {
+    return runServer(TEST_DATABASE_URL);
+  });
+
+  beforeEach(function() {
+    return seedCutData();
+  });
+
+  after(function() {
+    return closeServer();
+  });
+});
