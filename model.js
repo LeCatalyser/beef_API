@@ -57,6 +57,6 @@ userSchema.methods.apiRepr = function() {
 
 const Cut = mongoose.model("Cut", cutSchema);
 const Order = mongoose.model("Order", orderSchema);
-const User = mocha.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = { Cut, Order, User };

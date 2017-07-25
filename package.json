@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/LeCatalyser/beef_API#readme",
   "dependencies": {
-    "mocha": "^3.4.2"
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
+    "express": "^4.15.3",
+    "mocha": "^3.4.2",
+    "mongoose": "^4.11.4",
+    "morgan": "^1.8.2"
   }
 }
