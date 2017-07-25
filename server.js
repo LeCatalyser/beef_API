@@ -84,6 +84,20 @@ app.post("/Cuts", (req, res) => {
     });
 });
 
+app.delete("/Cuts", (req, res) => {
+  cutStyle
+    .findAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      //why the empty function
+      res.status(204).json({ message: "success" });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "something went terribly wrong" });
+    });
+});
+
 let server;
 
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
