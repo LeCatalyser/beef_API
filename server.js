@@ -98,8 +98,37 @@ app.delete("/Cuts", (req, res) => {
     });
 });
 
+app.put("/Cuts", (req, res) => {
+  cutStyle;
+  if (!(req.params && req.body && req.params === req.body)) {
+    res.status(400).json({
+      error: "Request body values must match"
+    });
+  }
+  const updated = {}; //doesn't this have to be an array that would be populated with required fields?
+  const updateableFields = ["style", "weight"];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+  cutStyle
+    .findAndUpdate(req.params, { $set: updated }, { new: true })
+    .exec()
+    .then(updatedCut => res.status(201).json(updatedCut.apiRepr()))
+    .catch(err => res.status(500).json({ message: "something went wrong" }));
+});
+
+app.use("*", function(req, res) {
+  res.status(404).json({ message: "Not Found" });
+});
+
+// closeServer needs access to a server object, but that only
+// gets created when `runServer` runs, so we declare `server` here
+// and then assign a value to it in run
 let server;
 
+// this function connects to our database, then starts the server
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
@@ -119,6 +148,8 @@ function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   });
 }
 
+// this function closes the server, and returns a promise. we'll
+// use it in our integration tests later.
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
@@ -133,6 +164,8 @@ function closeServer() {
   });
 }
 
+// if server.js is called directly (aka, with `node server.js`), this block
+// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
   runServer().catch(err => console.error(err));
 }
