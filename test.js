@@ -82,4 +82,14 @@ describe("Cut API resource", function() {
 
     //how to determine which ones to call...
   });
+
+  describe("POST endpoint", function() {
+    it("should add a new cut", function() {
+      const cutStyle = {
+        //don't need a new function, right?
+        style: cutName,
+        weight: 42000
+      };
+    });
+  });
 });

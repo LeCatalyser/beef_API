@@ -63,9 +63,9 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/Cuts", (req, res) => {
-  const requiredFields = ["style", "weight"];
-  for (let i = 0; i < requiredFields.length; i++) {
-    const field = requiredFields[i];
+  const requiredFieldsCuts = ["style", "weight"];
+  for (let i = 0; i < requiredFieldsCuts.length; i++) {
+    const field = requiredFieldsCuts[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`; //isn't the const message and console.log repetitive?
       //I recall a simpler way to do it
@@ -82,6 +82,41 @@ app.post("/Cuts", (req, res) => {
       console.error(err);
       res.status(500).json({ error: "something went wrong" });
     });
+});
+
+app.post("/Orders", (req, res) => {
+  //user vs. schema? i think i have something wrong?
+  const requiredFieldsOrders = [
+    "delivery",
+    "price",
+    "cutId",
+    "userId",
+    "quantity"
+  ];
+  for (let i = 0; i < requiredFieldsOrders.length; ++i) {
+    const field = requiredFieldsOrders[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  OrderDetails.create({
+    delivery: req.body.delivery,
+    price: req.body.price, //why body?
+    cutId: req.body.cutId,
+    userId: req.body.userId,
+    quantity: req.body.quantity
+  })
+    .then(orderDetails => res.status(201).json(orderDetails.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "something went wrong" });
+    });
+});
+
+app.post("/Users", (req, res) => {
+  const requiredFieldsUsers = [];
 });
 
 app.delete("/Cuts", (req, res) => {
