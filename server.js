@@ -50,9 +50,38 @@ app.get("/orders", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-  users.find().exec().then(users => {
-    res.json(users.map(post => users.apiRepr()));
-  });
+  users
+    .find()
+    .exec()
+    .then(users => {
+      res.json(users.map(post => users.apiRepr()));
+    }) //no ; bc I haven't completed the function
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "this isn't working. Try again" });
+    });
+});
+
+app.post("/Cuts", (req, res) => {
+  const requiredFields = ["style", "weight"];
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`; //isn't the const message and console.log repetitive?
+      //I recall a simpler way to do it
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  CutStyle.create({
+    style: req.body.style,
+    weight: req.body.weight
+  })
+    .then(cutStyle => res.status(201).json(cutStyle.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "something went wrong" });
+    });
 });
 
 let server;
