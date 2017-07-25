@@ -24,6 +24,7 @@ const orderSchema = mongoose.Schema({
 });
 
 orderSchema.methods.apiRepr = function() {
+  //what I show to the user
   return {
     id: this._id,
     delivery: this.delivery,

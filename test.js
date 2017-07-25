@@ -1,3 +1,5 @@
+//with this code I am simulating, what I want to happen on the front end. Describe and it syntax help with that objective
+
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 
@@ -85,11 +87,21 @@ describe("Cut API resource", function() {
 
   describe("POST endpoint", function() {
     it("should add a new cut", function() {
-      const cutStyle = {
+      const newCut = {
         //don't need a new function, right?
-        style: cutName,
+        style: "rost-biff",
         weight: 42000
       };
+      return chai.request(app).post("/Cuts").send(newCut).then(function(res) {
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.be.a("object");
+        res.body.should.include.keys("id", "style", "weight");
+        res.body.style.should.be.a("string");
+        res.body.weight.should.be.a("number");
+        res.body.style.should.equal("rost-biff");
+        res.body.weight.should.equal(42000);
+      });
     });
   });
 });

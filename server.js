@@ -30,7 +30,6 @@ app.get("/Cuts", (req, res) => {
       res.json(cuts.map(cut => cut.apiRepr()));
     })
     .catch(err => {
-      //here I am to catch an error in the code, no if the cut is in inventory, right?
       console.error(err);
       res.status(500).json({ error: "this isn't working. Try again" });
     });
@@ -55,7 +54,7 @@ app.get("/users", (req, res) => {
     .exec()
     .then(users => {
       res.json(users.map(post => users.apiRepr()));
-    }) //no ; bc I haven't completed the function
+    })
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "this isn't working. Try again" });
@@ -67,13 +66,12 @@ app.post("/Cuts", (req, res) => {
   for (let i = 0; i < requiredFieldsCuts.length; i++) {
     const field = requiredFieldsCuts[i];
     if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`; //isn't the const message and console.log repetitive?
-      //I recall a simpler way to do it
-      console.error(message);
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message); //prints red text
       return res.status(400).send(message);
     }
   }
-  CutStyle.create({
+  Cut.create({
     style: req.body.style,
     weight: req.body.weight
   })
@@ -87,6 +85,8 @@ app.post("/Cuts", (req, res) => {
 app.post("/Orders", (req, res) => {
   //user vs. schema? i think i have something wrong?
   const requiredFieldsOrders = [
+    //fields passed on by user
+    //"id", mongo picks the id
     "delivery",
     "price",
     "cutId",
@@ -116,12 +116,28 @@ app.post("/Orders", (req, res) => {
 });
 
 app.post("/Users", (req, res) => {
-  const requiredFieldsUsers = [];
+  const requiredFieldsUsers = ["id", "password"];
+  for (let i = 0; i < requiredFieldsUsers.length; ++i) {
+    const field = requiredFieldsUsers[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\' in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  UserDetails.create({
+    id: req.body.id,
+    password: req.body.password
+  })
+    .then(orderDetails => res.status(201).json(userDetails.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "something went wrong" });
+    });
 });
 
 app.delete("/Cuts", (req, res) => {
-  cutStyle
-    .findAndRemove(req.params.id)
+  Cut.findAndRemove(req.params.id)
     .exec()
     .then(() => {
       //why the empty function
@@ -134,21 +150,20 @@ app.delete("/Cuts", (req, res) => {
 });
 
 app.put("/Cuts", (req, res) => {
-  cutStyle;
   if (!(req.params && req.body && req.params === req.body)) {
     res.status(400).json({
       error: "Request body values must match"
     });
   }
-  const updated = {}; //doesn't this have to be an array that would be populated with required fields?
+  const updated = {};
   const updateableFields = ["style", "weight"];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
     }
   });
-  cutStyle
-    .findAndUpdate(req.params, { $set: updated }, { new: true })
+  // updated is something like {style: "Flank", weight: 20000}
+  Cut.findAndUpdate(req.params, { $set: updated }, { new: true })
     .exec()
     .then(updatedCut => res.status(201).json(updatedCut.apiRepr()))
     .catch(err => res.status(500).json({ message: "something went wrong" }));
@@ -156,7 +171,7 @@ app.put("/Cuts", (req, res) => {
 
 app.use("*", function(req, res) {
   res.status(404).json({ message: "Not Found" });
-});
+}); //fall back if none of the code above functions
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
