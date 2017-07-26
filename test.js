@@ -159,21 +159,21 @@ describe("Cut API resource", function() {
 });
 
 //Testing for /order endpoint
-// function seedOrderData() {
-//   console.info("Seeding order data");
-//   const orderData = ["delivery", "price", "cutId", "userId", "quantity"];
+function seedOrderData() {
+  console.info("Seeding order data");
+  const orderData = ["delivery", "price", "cutId", "userId", "quantity"];
 
-//   const orderDataDetails = []; //why the empty array? it will be populated with info below?
-//   orderData.forEach(customerOrder => {
-//     const orderDetails = {
-//       delivery: "truck",
-//       price: 350,
-//       cutId: "seedCut", //would mongo assign this ID?
-//       userId: "East Coast", //again would mongo assing this?
-//       quantity: 15000 // this would leave product in inventory, how would i revise that?
-//     };
-//     orderDataDetails.push(orderDetails);
-//   });
+  const orderDataDetails = []; //why the empty array? it will be populated with info below?
+  orderData.forEach(customerOrder => {
+    const orderDetails = {
+      delivery: "truck",
+      price: 350,
+      cutId: "seedCut", //would mongo assign this ID?
+      userId: "East Coast", //again would mongo assing this?
+      quantity: 15000 // this would leave product in inventory, how would i revise that?
+    };
+    orderDataDetails.push(orderDetails);
+  });
 
-//   return Order.insertMany(orderDataDetails);
-// }
+  return Order.insertMany(orderDataDetails);
+}

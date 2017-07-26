@@ -22,38 +22,17 @@ const { DATABASE_URL, PORT } = require("./config");
 // const config = require("./config");
 // const DATABASE_URL = config.DATABSE_URL;
 // const PORT = config.PORT;
+
+////////////////////////////////////////////////////
+// CUTS
+////////////////////////////////////////////////////
+
 const { Cut, Order, User } = require("./model");
 app.get("/Cuts", (req, res) => {
   Cut.find()
     .exec() //tell mongo function to quick off and start running
     .then(cuts => {
       res.json(cuts.map(cut => cut.apiRepr()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: "this isn't working. Try again" });
-    });
-});
-
-app.get("/orders", (req, res) => {
-  order
-    .find()
-    .exec()
-    .then(orders => {
-      res.json(orders.map(post => orders.apiRepr()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: "this isn't working. Try again" });
-    });
-});
-
-app.get("/users", (req, res) => {
-  users
-    .find()
-    .exec()
-    .then(users => {
-      res.json(users.map(post => users.apiRepr()));
     })
     .catch(err => {
       console.error(err);
@@ -79,6 +58,60 @@ app.post("/Cuts", (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "something went wrong" });
+    });
+});
+
+app.put("/cuts/:id", (req, res) => {
+  // if (!(req.params && req.body && req.params === req.body)) {
+  //   res.status(400).json({
+  //     error: "Request body values must match"
+  //   });
+  // }
+  const updated = {};
+  const updateableFields = ["style", "weight"];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+  // updated is something like {style: "Flank", weight: 20000}
+  Cut.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }) //mongoose
+    .exec()
+    .then(updatedCut => res.status(201).json(updatedCut.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "something went wrong" });
+    });
+});
+
+app.delete("/cuts/:id", (req, res) => {
+  Cut.findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      res.status(204).json({ message: "cut has been deleted" });
+    })
+    .catch(err => {
+      console.error(err);
+      res
+        .status(500)
+        .json({ error: "something went wrong, cut wasn't deleted" });
+    });
+});
+
+////////////////////////////////////////////////////
+// ORDERS
+////////////////////////////////////////////////////
+
+app.get("/orders", (req, res) => {
+  order
+    .find()
+    .exec()
+    .then(orders => {
+      res.json(orders.map(post => orders.apiRepr()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "this isn't working. Try again" });
     });
 });
 
@@ -115,6 +148,23 @@ app.post("/Orders", (req, res) => {
     });
 });
 
+////////////////////////////////////////////////////
+// USERS
+////////////////////////////////////////////////////
+
+app.get("/users", (req, res) => {
+  users
+    .find()
+    .exec()
+    .then(users => {
+      res.json(users.map(post => users.apiRepr()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "this isn't working. Try again" });
+    });
+});
+
 app.post("/Users", (req, res) => {
   const requiredFieldsUsers = ["id", "password"];
   for (let i = 0; i < requiredFieldsUsers.length; ++i) {
@@ -133,43 +183,6 @@ app.post("/Users", (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "something went wrong" });
-    });
-});
-
-app.delete("/cuts/:id", (req, res) => {
-  Cut.findByIdAndRemove(req.params.id)
-    .exec()
-    .then(() => {
-      res.status(204).json({ message: "cut has been deleted" });
-    })
-    .catch(err => {
-      console.error(err);
-      res
-        .status(500)
-        .json({ error: "something went wrong, cut wasn't deleted" });
-    });
-});
-
-app.put("/cuts/:id", (req, res) => {
-  // if (!(req.params && req.body && req.params === req.body)) {
-  //   res.status(400).json({
-  //     error: "Request body values must match"
-  //   });
-  // }
-  const updated = {};
-  const updateableFields = ["style", "weight"];
-  updateableFields.forEach(field => {
-    if (field in req.body) {
-      updated[field] = req.body[field];
-    }
-  });
-  // updated is something like {style: "Flank", weight: 20000}
-  Cut.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }) //mongoose
-    .exec()
-    .then(updatedCut => res.status(201).json(updatedCut.apiRepr()))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ message: "something went wrong" });
     });
 });
 
