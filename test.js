@@ -104,4 +104,33 @@ describe("Cut API resource", function() {
       });
     });
   });
+
+  describe("DELETE endpoint", function() {
+    it("should delete a existing cut by id", function() {
+      let cut;
+      return Cut.findOne()
+        .exec()
+        .then(_cut => {
+          cut = _cut;
+          return chai.request(app).delete(`/cuts/${cut.id}`);
+        })
+        .then(function(res) {
+          res.should.have.status(204);
+          return Cut.findById(cut.id);
+        })
+        .then(function(_post) {
+          should.not.exist(_post);
+        });
+    });
+  });
+
+  describe("PUT endpoint", function() {
+    it("should modify an existing cut", function() {
+      //find a current cut
+      //modify the cut
+      //give it the paramenters for how to modify the cut
+      //return to inventory
+      //query the database to confirm the change has been applied
+    });
+  });
 });

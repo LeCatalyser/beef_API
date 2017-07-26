@@ -136,16 +136,17 @@ app.post("/Users", (req, res) => {
     });
 });
 
-app.delete("/Cuts", (req, res) => {
-  Cut.findAndRemove(req.params.id)
+app.delete("/cuts/:id", (req, res) => {
+  Cut.findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
-      //why the empty function
-      res.status(204).json({ message: "success" });
+      res.status(204).json({ message: "cut has been deleted" });
     })
     .catch(err => {
       console.error(err);
-      res.status(500).json({ error: "something went terribly wrong" });
+      res
+        .status(500)
+        .json({ error: "something went wrong, cut wasn't deleted" });
     });
 });
 
