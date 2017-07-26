@@ -150,12 +150,12 @@ app.delete("/cuts/:id", (req, res) => {
     });
 });
 
-app.put("/Cuts", (req, res) => {
-  if (!(req.params && req.body && req.params === req.body)) {
-    res.status(400).json({
-      error: "Request body values must match"
-    });
-  }
+app.put("/cuts/:id", (req, res) => {
+  // if (!(req.params && req.body && req.params === req.body)) {
+  //   res.status(400).json({
+  //     error: "Request body values must match"
+  //   });
+  // }
   const updated = {};
   const updateableFields = ["style", "weight"];
   updateableFields.forEach(field => {
@@ -164,10 +164,13 @@ app.put("/Cuts", (req, res) => {
     }
   });
   // updated is something like {style: "Flank", weight: 20000}
-  Cut.findAndUpdate(req.params, { $set: updated }, { new: true })
+  Cut.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }) //mongoose
     .exec()
     .then(updatedCut => res.status(201).json(updatedCut.apiRepr()))
-    .catch(err => res.status(500).json({ message: "something went wrong" }));
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "something went wrong" });
+    });
 });
 
 app.use("*", function(req, res) {

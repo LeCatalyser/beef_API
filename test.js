@@ -125,7 +125,30 @@ describe("Cut API resource", function() {
   });
 
   describe("PUT endpoint", function() {
-    it("should modify an existing cut", function() {
+    it("Should modify an existing cut", function() {
+      const updateCut = {
+        style: "Flap",
+        weight: 21000
+      };
+      return Cut.findOne()
+        .exec()
+        .then(post => {
+          updateCut.id = post.id;
+          return chai.request(app).put(`/cuts/${post.id}`).send(updateCut);
+        })
+        .then(res => {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a("object");
+          res.body.style.should.equal(updateCut.style);
+          res.body.weight.should.equal(updateCut.weight);
+
+          return Cut.findById(res.body.id).exec();
+        })
+        .then(post => {
+          post.style.should.equal(updateCut.style);
+          post.weight.should.equal(updateCut.weight);
+        });
       //find a current cut
       //modify the cut
       //give it the paramenters for how to modify the cut
@@ -134,3 +157,23 @@ describe("Cut API resource", function() {
     });
   });
 });
+
+//Testing for /order endpoint
+// function seedOrderData() {
+//   console.info("Seeding order data");
+//   const orderData = ["delivery", "price", "cutId", "userId", "quantity"];
+
+//   const orderDataDetails = []; //why the empty array? it will be populated with info below?
+//   orderData.forEach(customerOrder => {
+//     const orderDetails = {
+//       delivery: "truck",
+//       price: 350,
+//       cutId: "seedCut", //would mongo assign this ID?
+//       userId: "East Coast", //again would mongo assing this?
+//       quantity: 15000 // this would leave product in inventory, how would i revise that?
+//     };
+//     orderDataDetails.push(orderDetails);
+//   });
+
+//   return Order.insertMany(orderDataDetails);
+// }
