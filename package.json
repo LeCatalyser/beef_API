@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/LeCatalyser/beef_API#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",
     "chai-http": "^3.0.0",

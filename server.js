@@ -153,11 +153,10 @@ app.post("/Orders", (req, res) => {
 ////////////////////////////////////////////////////
 
 app.get("/users", (req, res) => {
-  users
-    .find()
+  User.find()
     .exec()
     .then(users => {
-      res.json(users.map(post => users.apiRepr()));
+      res.json(users.map(user => user.apiRepr()));
     })
     .catch(err => {
       console.error(err);
