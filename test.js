@@ -216,6 +216,7 @@ describe("USER API resource", function() {
   });
 
   describe("GET endpoint", function() {
+    //this code runs once on travis
     it("Should validate users", function() {
       let res;
       return chai
@@ -232,20 +233,21 @@ describe("USER API resource", function() {
         });
     });
   });
-  // describe("POST endpoint", function() {
-  //   it("should add a new user", function() {
-  //     const newUser = {
-  //       email: "user1@gmail.com",
-  //       password: bcrypt.hashSync("turkey", 8)
-  //     };
-  //     return chai.request(app).post("/Users").send(newUser).then(function(res) {
-  //       res.should.have.status(201);
-  //       res.should.be.json;
-  //       res.body.should.be.a("object");
-  //       res.body.should.include.keys("email", "password")
-  //     })
-  //   })
-  // })
+
+  describe("POST endpoint", function() {
+    it("should add a new user", function() {
+      const newUser = {
+        email: "user4@gmail.com",
+        password: "turkey"
+      };
+      return chai.request(app).post("/Users").send(newUser).then(function(res) {
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.be.a("object");
+        res.body.should.include.keys("email", "id");
+      });
+    });
+  });
 });
 
 //return User.insertMany(seedUser);

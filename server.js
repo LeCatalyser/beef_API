@@ -1,6 +1,7 @@
 const express = require("express"); //how we make express available to application code
 const morgan = require("morgan"); //logging middleware
 const bodyParser = require("body-parser");
+const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -165,7 +166,8 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/Users", (req, res) => {
-  const requiredFieldsUsers = ["id", "password"];
+  //this is the code that creates the user
+  const requiredFieldsUsers = ["email", "password"];
   for (let i = 0; i < requiredFieldsUsers.length; ++i) {
     const field = requiredFieldsUsers[i];
     if (!(field in req.body)) {
@@ -174,11 +176,11 @@ app.post("/Users", (req, res) => {
       return res.status(400).send(message);
     }
   }
-  UserDetails.create({
-    id: req.body.id,
-    password: req.body.password
+  User.create({
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 8)
   })
-    .then(orderDetails => res.status(201).json(userDetails.apiRepr()))
+    .then(user => res.status(201).json(user.apiRepr()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "something went wrong" });
