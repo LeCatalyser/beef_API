@@ -68,7 +68,7 @@ app.put("/cuts/:id", (req, res) => {
   //     error: "Request body values must match"
   //   });
   // }
-  const updated = {};
+  const updated = {}; //const is block scoped
   const updateableFields = ["style", "weight"];
   updateableFields.forEach(field => {
     if (field in req.body) {
@@ -116,7 +116,6 @@ app.get("/orders", (req, res) => {
 });
 
 app.post("/Orders", (req, res) => {
-  //user vs. schema? i think i have something wrong?
   const requiredFieldsOrders = [
     //fields passed on by user
     //"id", mongo picks the id
@@ -145,6 +144,37 @@ app.post("/Orders", (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: "something went wrong" });
+    });
+});
+
+app.delete("/orders/:id", (req, res) => {
+  Order.findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      res.status(204).json({ message: "Order has been deleted" });
+    })
+    .catch(err => {
+      console.error(err);
+      res
+        .status(500)
+        .json({ error: "something went wrong, the order wasn't deleted" });
+    });
+});
+
+app.put("/orders/:id", (req, res) => {
+  const updated = {};
+  const updateableFields = ["delivery", "quantity"];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+  Order.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+    .exec()
+    .then(updatedOrder => res.status(201).json(updatedOrder.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Something went wrong" });
     });
 });
 

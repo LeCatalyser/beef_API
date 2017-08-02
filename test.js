@@ -112,7 +112,7 @@ describe("Cut API resource", function() {
   });
 
   describe("DELETE endpoint", function() {
-    it("should delete a existing cut by id", function() {
+    it("should delete an existing cut by id", function() {
       let cut;
       return Cut.findOne()
         .exec()
@@ -124,8 +124,8 @@ describe("Cut API resource", function() {
           res.should.have.status(204);
           return Cut.findById(cut.id);
         })
-        .then(function(_post) {
-          should.not.exist(_post);
+        .then(function(_cut) {
+          should.not.exist(_cut);
         });
     });
   });
@@ -133,14 +133,15 @@ describe("Cut API resource", function() {
   describe("PUT endpoint", function() {
     it("Should modify an existing cut", function() {
       const updateCut = {
+        //I cannot update the value of the const
         style: "Flap",
         weight: 21000
       };
       return Cut.findOne()
         .exec()
-        .then(post => {
-          updateCut.id = post.id;
-          return chai.request(app).put(`/cuts/${post.id}`).send(updateCut);
+        .then(cut => {
+          updateCut.id = cut.id;
+          return chai.request(app).put(`/cuts/${cut.id}`).send(updateCut);
         })
         .then(res => {
           res.should.have.status(201);
@@ -151,9 +152,9 @@ describe("Cut API resource", function() {
 
           return Cut.findById(res.body.id).exec();
         })
-        .then(post => {
-          post.style.should.equal(updateCut.style);
-          post.weight.should.equal(updateCut.weight);
+        .then(cut => {
+          cut.style.should.equal(updateCut.style);
+          cut.weight.should.equal(updateCut.weight);
         });
       //find a current cut
       //modify the cut
@@ -193,6 +194,7 @@ function userSeedData() {
 }
 
 function tearDownDb() {
+  //what am I achieving here?
   console.warn("Deleting database");
   return mongoose.connection.dropDatabase();
 }
@@ -345,25 +347,51 @@ describe("ORDER API resource", function() {
       });
     });
   });
+
+  describe("DELETE endpoint", function() {
+    it("should delete an existing Order by id", function() {
+      let order; // diference between promise. doesn't this
+      return Order.findOne()
+        .exec()
+        .then(_order => {
+          order = _order;
+          return chai.request(app).delete(`/orders/${order.id}`);
+        })
+        .then(function(res) {
+          res.should.have.status(204);
+          return Order.findById(order.id);
+        })
+        .then(function(_order) {
+          should.not.exist(_order);
+        });
+    });
+  });
+
+  describe("PUT endpoint", function() {
+    it("Should modify an existing order", function() {
+      const updateOrder = {
+        delivery: "2017-09-11T00:00:00.000Z",
+        quantity: 12000
+      };
+      return Order.findOne()
+        .exec()
+        .then(order => {
+          updateOrder.id = order.id;
+          return chai.request(app).put(`/orders/${order.id}`).send(updateOrder);
+        })
+        .then(res => {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a("object");
+          res.body.delivery.should.equal(updateOrder.delivery);
+          res.body.quantity.should.equal(updateOrder.quantity);
+
+          return Order.findById(res.body.id).exec();
+        })
+        .then(order => {
+          order.delivery.toISOString().should.equal(updateOrder.delivery);
+          order.quantity.should.equal(updateOrder.quantity);
+        });
+    });
+  });
 });
-
-//return User.insertMany(seedUser);
-
-// function seedOrderData() {
-//   console.info("Seeding order data");
-//   const orderData = ["delivery", "price", "cutId", "userId", "quantity"];
-
-//   const orderDataDetails = []; //why the empty array? it will be populated with info below?
-//   orderData.forEach(customerOrder => {
-//     const orderDetails = {
-//       delivery: "truck",
-//       price: 350,
-//       cutId: "seedCut", //would mongo assign this ID?
-//       userId: "East Coast", //again would mongo assing this?
-//       quantity: 15000 // this would leave product in inventory, how would i revise that?
-//     };
-//     orderDataDetails.push(orderDetails);
-//   });
-
-//   return Order.insertMany(orderDataDetails);
-// }
