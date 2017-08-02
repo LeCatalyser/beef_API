@@ -250,6 +250,103 @@ describe("USER API resource", function() {
   });
 });
 
+////////////////////////////////////////////////////
+// ORDERS
+////////////////////////////////////////////////////
+
+function orderSeedData() {
+  console.info("Seeding order info");
+
+  return Promise.all([seedCutData(), userSeedData()]).then(function(data) {
+    //mongoose insert.many calls
+    // var cuts = data[0];
+    // var users = data[1];
+
+    const [cuts, users] = data;
+
+    const seedOrdersArray = [];
+    cuts.forEach(cut => {
+      const newOrder = {
+        delivery: "2018-01-01",
+        price: 450,
+        cutId: cut._id,
+        userId: users[0]._id,
+        quantity: 20000
+      };
+      seedOrdersArray.push(newOrder);
+    });
+    return Order.insertMany(seedOrdersArray);
+  });
+}
+
+describe("ORDER API resource", function() {
+  before(function() {
+    return runServer(TEST_DATABASE_URL);
+  });
+
+  beforeEach(function() {
+    return orderSeedData();
+  });
+
+  afterEach(function() {
+    return tearDownDb();
+  });
+
+  after(function() {
+    return closeServer();
+  });
+
+  describe("GET endpoint", function() {
+    it("Should validate orders", function() {
+      let res;
+      return chai
+        .request(app)
+        .get("/Orders")
+        .then(function(thisRes) {
+          res = thisRes;
+          res.should.have.status(200);
+          res.body.should.have.length.of.at.least(1);
+          return Order.count();
+        })
+        .then(function(count) {
+          res.body.should.have.lengthOf(count);
+        });
+    });
+  });
+
+  describe("POST endpoint", function() {
+    it("should add a new order", function() {
+      return Promise.all([Cut.findOne(), User.findOne()]).then(function(data) {
+        const [cut, user] = data;
+
+        const newOrder = {
+          delivery: "2018-02-18", //do I actually set in the delivery location?
+          price: 350, //how do I connect I assign price per endpoint?
+          userId: user._id,
+          quantity: 16000,
+          cutId: cut._id //how do I manage the inventory?
+        };
+        return chai
+          .request(app)
+          .post("/Orders")
+          .send(newOrder)
+          .then(function(res) {
+            res.should.have.status(201);
+            res.should.be.json;
+            res.body.should.be.a("object");
+            res.body.should.include.keys(
+              "delivery",
+              "price",
+              "userId",
+              "quantity",
+              "cutId"
+            );
+          });
+      });
+    });
+  });
+});
+
 //return User.insertMany(seedUser);
 
 // function seedOrderData() {

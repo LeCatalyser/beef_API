@@ -104,11 +104,10 @@ app.delete("/cuts/:id", (req, res) => {
 ////////////////////////////////////////////////////
 
 app.get("/orders", (req, res) => {
-  order
-    .find()
+  Order.find()
     .exec()
     .then(orders => {
-      res.json(orders.map(post => orders.apiRepr()));
+      res.json(orders.map(order => order.apiRepr()));
     })
     .catch(err => {
       console.error(err);
@@ -135,7 +134,7 @@ app.post("/Orders", (req, res) => {
       return res.status(400).send(message);
     }
   }
-  OrderDetails.create({
+  Order.create({
     delivery: req.body.delivery,
     price: req.body.price, //why body?
     cutId: req.body.cutId,
