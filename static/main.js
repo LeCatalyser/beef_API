@@ -2,11 +2,28 @@
 
 const state = {
   //local copy of API objects
-  orders: [], //will download the data from server
+  orders: [
+    {
+      delivery: Date,
+      price: Number,
+      cutId: "string",
+      userId: "string",
+      quentity: Number
+    }
+  ], //will download the data from server
 
-  cuts: [],
-
-  users: []
+  cuts: [
+    {
+      style: "string",
+      weight: Number
+    }
+  ],
+  users: [
+    {
+      email: { type: "String", unique: true },
+      password: { type: "string", unique: true }
+    }
+  ]
 };
 
 const getOrders = () => {
@@ -150,6 +167,34 @@ const deleteOrders = () => {
 };
 deleteOrders();
 
+const deleteCut = () => {
+  return fetch("/cut", {
+    method: "DELETE"
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(cut => {
+      console.log(cut);
+      state.cut = cut;
+    });
+};
+deleteCut();
+
+const deleteUser = () => {
+  return fetch("/users", {
+    method: "DELETE"
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(users => {
+      console.log(users);
+      state.users = users;
+    });
+};
+deleteUser();
+
 /* global $ */
 //will help with making posts
 // $(".make-cut").on("click", e => {
@@ -172,6 +217,13 @@ deleteOrders();
 // });
 
 //Rendering-VIEW
-const render = state => {};
+const render = state => {
+  var createOrder = state.orders;
+};
 //build out the getCuts function, have data at state.cuts
 //ACTIONS: CONTROLER Things users can do.
+$(function() {
+  const currentPage = {
+    currentPage: "homePage"
+  };
+});
