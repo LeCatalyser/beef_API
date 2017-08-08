@@ -3,18 +3,24 @@
 	background: #f2f2f2;
 }
 main{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  
+ 
 }
-.welcome {
-  text-align: center;
-    padding: 10px;
-    margin: 15px;
-}
+
 label{
   border-radius: 10px;
+}
+
+.welcome
+{
+  text-align: center;
+}
+
+section
+{
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .box 
 {

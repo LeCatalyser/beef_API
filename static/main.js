@@ -8,7 +8,8 @@ const state = {
   //local copy of API objects
   orders: [], //will download the data from server
   cuts: [],
-  users: []
+  users: [],
+  currentPage: "welcome"
 };
 
 const getOrders = () => {
@@ -198,14 +199,15 @@ const getUsers = () => {
 //     });
 // });
 
-//Rendering-VIEW
+//Rendering-VIEW//focus on the main Render function
 //Checklist
 //Render info per page
 //Set up page pick to show/hide current page
 //
-// const render = state => {
-//   var createOrder = state.orders;
-// };
+const render = () => {
+  $("section").css("display", "none");
+  $("." + state.currentPage).css("display", "block");
+};
 //build out the getCuts function, have data at state.cuts
 
 //ACTIONS: CONTROLER Things users can do.
@@ -220,12 +222,14 @@ const getUsers = () => {
 //As an administrator I want to grant/revoke access
 
 $(function() {
-  const currentPage = {
-    currentPage: "order-form"
-  };
   getCuts();
   getOrders();
   getUsers();
+  render();
+});
+$(".log-in").on("click", function() {
+  state.currentPage = "order-form";
+  render();
 });
 
 //create second landing page-Users
