@@ -1,19 +1,16 @@
-*{
-	box-sizing: border-box;
-	background: #f2f2f2;
-}
 main{
-  
- 
+
 }
 
 label{
-  border-radius: 10px;
+  border-radius: 1em;
 }
 
 .welcome
 {
   text-align: center;
+  background: #3e61bf;
+ 
 }
 
 section
@@ -47,7 +44,9 @@ input
 	margin-top: 15px;
 	border: 2px solid #dcdcdc;
 	margin-bottom: 15px;
-	padding: 15px;
+	padding: 15px; 
+  position: relative;
+  border-radius: 5px;
 }
 
 button
