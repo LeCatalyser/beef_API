@@ -7,7 +7,7 @@ Beef.state = {
   orders: [], //will download the data from server
   cuts: [],
   users: [],
-  currentPage: "welcome"
+  currentPage: "welcome-back"
 };
 
 Beef.getOrders = () => {
@@ -39,7 +39,11 @@ Beef.getCuts = () => {
 
 Beef.getUsers = () => {
   return fetch("/users", {
-    method: "GET"
+    //sends a lists of users
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
   })
     .then(res => {
       return res.json();
@@ -50,7 +54,37 @@ Beef.getUsers = () => {
     });
 };
 
+Beef.postUser = newUser => {
+  //only sends the single user I just created
+  return fetch("/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email: newUser.email,
+      password: newUser.password
+    })
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(user => {
+      console.log(user);
+      return user;
+    });
+};
+
+// HOW this will be called, in the controller
+// Beef.postUser({
+//   email: "email@example.com",
+//   password: "example-password"
+// }).then(user => {
+//   console.log(`I just created a user! The id is ${user.id}`);
+// });
+
 Beef.createCuts = () => {
+  //universal function
   fetch("/cuts", {
     method: "POST",
     headers: {

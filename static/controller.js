@@ -29,6 +29,12 @@ $(function() {
   Beef.getUsers();
   Beef.render();
 });
+
+$(".sign-up").on("click", function() {
+  Beef.state.currentPage = "sign-up";
+  Beef.render();
+});
+
 $(".log-in").on("click", function() {
   Beef.state.currentPage = "order-form";
   Beef.render();
