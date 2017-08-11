@@ -7,7 +7,8 @@ Beef.state = {
   orders: [], //will download the data from server
   cuts: [],
   users: [],
-  currentPage: "welcome-back"
+  currentPage: "welcome",
+  currentUser: null
 };
 
 Beef.getOrders = () => {
@@ -74,7 +75,6 @@ Beef.postUser = newUser => {
       return user;
     });
 };
-
 // HOW this will be called, in the controller
 // Beef.postUser({
 //   email: "email@example.com",
@@ -83,47 +83,16 @@ Beef.postUser = newUser => {
 //   console.log(`I just created a user! The id is ${user.id}`);
 // });
 
-Beef.createCuts = () => {
-  //universal function
-  fetch("/cuts", {
+Beef.createCuts = newCut => {
+  return fetch("/cuts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(
-      {
-        style: "Flank",
-        weight: 5000
-      },
-      {
-        style: "S-Insco",
-        weight: 42000
-      },
-      {
-        style: "Rost-biff",
-        weight: 42000
-      },
-      {
-        style: "Flap",
-        weight: 42000
-      },
-      {
-        style: "Brisket",
-        weight: 42000
-      },
-      {
-        style: "Skirt",
-        weight: 42000
-      },
-      {
-        style: "Rump-caps",
-        weight: 42000
-      },
-      {
-        style: "strip-loin",
-        weight: 42000
-      }
-    )
+    body: JSON.stringify({
+      style: newCut.style,
+      weight: newCut.weight
+    })
   })
     .then(res => {
       return res.json();
@@ -133,17 +102,17 @@ Beef.createCuts = () => {
     });
 };
 
-Beef.createOrder = () => {
-  fetch("/orders", {
+Beef.createOrder = newOrder => {
+  return fetch("/orders", {
     method: "POST",
     headers: {
       "Content-Type": "application/json" //explanation
     },
     body: JSON.stringify({
-      delivery: Date, //do we need to config this?
-      price: Number,
-      cutId: "string",
-      quantity: Number
+      delivery: newOrder.delivery, //do we need to config this?
+      price: newOrder.price,
+      cutId: newOrder.cutId,
+      quantity: newOrder.quantity
     })
   })
     .then(res => {
@@ -151,5 +120,33 @@ Beef.createOrder = () => {
     })
     .then(order => {
       console.log(`I just created a cut with id ${order.id}`);
+      return order;
     });
+};
+
+Beef.putOrder = modifyOrder => {
+  return fetch("orders/:id", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify({
+      delivery: modifyOrder.delivery,
+      quantity: modifyOrder.quantity
+    })
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(order => {
+      console.log(`Order has been modified with id ${order.id}`);
+      return order;
+    });
+};
+
+// DELETE /orders/5unpqiweunfiq/Remember delete doesn't have a body bc working with specific id
+Beef.deleteOrder = orderId => {
+  return fetch(`/orders/${orderId}`, {
+    method: "DELETE"
+  });
 };

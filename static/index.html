@@ -8,15 +8,16 @@
   <title>Beef USA</title>
   <meta name="order form Beef USA" content="The HTML5 Herald">
   <meta name="Luisa Salcedo" content="SitePoint">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="main.css">
 
 </head>
 
 <body>
   <main>
+    <h1 class="current-user"></h1>
     <!--Landing Page-->
-    <section class="welcome-back">
+    <section class="welcome" id="return">
       <p>Beef USA</p>
       <div class="box">
         <form>
@@ -25,25 +26,25 @@
 
           <label for="password"> Password:</label>
           <input placeholder="password"><br>
-          <a class="forgot_pass" href="#">Password help?</a>
+          <a class="forgot_pass" href="#">Password help</a>
         </form>
       </div>
       <button class="log-in">Log in!</button>
-      <a class="sign-up-link" href =#>Created a New User</a>
+      <a class="sign-up-link" href =#>Create a New User</a>
     </section>
 
 
-     <!--Landing Page-->
+     <!--Sign-up Page-->
 
     <section class="sign-up">
       <p>Beef USA</p>
       <div class="box">
         <form>
           <label for="email"> Email: </label>
-          <input placeholder="example@gmail.com" "text"><br>
+          <input class=email placeholder="example@gmail.com" "text"><br>
 
           <label for="password"> Password:</label>
-          <input placeholder="password"><br>
+          <input class=password placeholder="password"><br>
         </form>
       </div>
       <button class="create-user">Create User!</button>
@@ -66,6 +67,13 @@
     <!--Administrator landing page-->
 
     <section class="administrator">
+      <form>
+        <label for="style">style</label>
+        <input placeholder="style"><br>
+        <label for="weight">weight: </label>
+        <input placeholder="weight"><br>
+      </form>
+    </section>
 
 
   </main>
@@ -77,4 +85,4 @@
   <script src="controller.js"></script>
 </body>
 
-</html>
+</html> 

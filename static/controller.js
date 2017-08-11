@@ -23,6 +23,16 @@ $(".make-order").on("click", e => {});
 //As an administrator I want to add/delete cuts
 //As an administrator I want to grant/revoke access
 
+$(".create-user").on("click", e => {
+  Beef.postUser({
+    email: $(".email").val(),
+    password: $(".password").val()
+  }).then(user => {
+    Beef.state.currentUser = user;
+    Beef.render();
+  });
+});
+
 $(function() {
   Beef.getCuts();
   Beef.getOrders();
@@ -30,12 +40,23 @@ $(function() {
   Beef.render();
 });
 
-$(".sign-up").on("click", function() {
+$(".sign-up-link").on("click", function() {
   Beef.state.currentPage = "sign-up";
+  console.log("sign up");
   Beef.render();
 });
 
-$(".log-in").on("click", function() {
+$(".welcome-link").on("click", function() {
+  Beef.state.currentPage = "welcome";
+  Beef.render();
+});
+
+$(".order-form-link").on("click", function() {
   Beef.state.currentPage = "order-form";
+  Beef.render();
+});
+
+$(".administrator-link").on("click", function() {
+  Beef.state.currentPage = "administrator";
   Beef.render();
 });

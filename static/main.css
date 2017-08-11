@@ -1,16 +1,21 @@
 main{
 
 }
+body{
+  width: 100%;
+  height: 100%;
+  
+}
 
 label{
   border-radius: 1em;
 }
-
-.welcome
+#return
 {
-  text-align: center;
-  background: #3e61bf;
- 
+   background: #3e61bf;
+}
+p{
+  margin-top: 0;
 }
 
 section
@@ -40,7 +45,8 @@ input
 {
   display: block;
 	width: 100%;
-	height: 15px;
+  height: 15px;
+  box-sizing: border-box;
 	margin-top: 15px;
 	border: 2px solid #dcdcdc;
 	margin-bottom: 15px;
