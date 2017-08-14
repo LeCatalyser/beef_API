@@ -23,12 +23,22 @@ $(".make-order").on("click", e => {});
 //As an administrator I want to add/delete cuts
 //As an administrator I want to grant/revoke access
 
-$(".create-user").on("click", e => {
+$(".sign-up").on("click", e => {
   Beef.postUser({
     email: $(".email").val(),
     password: $(".password").val()
   }).then(user => {
     Beef.state.currentUser = user;
+    Beef.render();
+  });
+});
+
+$(".administrator").on("click", e => {
+  Beef.createCuts({
+    style: $(".style").val(),
+    weight: $(".weight").val()
+  }).then(order => {
+    Beef.state.currentCut = order;
     Beef.render();
   });
 });
