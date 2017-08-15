@@ -2,12 +2,19 @@ nav {
   margin-top: 20px;
 }
 
+.logo{
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  border-radius: .5em;
+}
+
 nav a{
   color: black;
   text-decoration: none;
 }
 nav a:hover{
-  color: grey;
+  color: blueviolet;
 }
 html, body, main {
   width: 100%;
@@ -54,6 +61,7 @@ section
   width: 600px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 1em;
 }
 .box 
 {
