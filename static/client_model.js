@@ -112,7 +112,8 @@ Beef.createOrder = newOrder => {
       delivery: newOrder.delivery, //do we need to config this?
       price: newOrder.price,
       cutId: newOrder.cutId,
-      quantity: newOrder.quantity
+      quantity: newOrder.quantity,
+      userId: "placeholder until we have a userId"
     })
   })
     .then(res => {

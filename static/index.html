@@ -6,7 +6,6 @@
   <meta charset="utf-8">
 
   <title>Beef USA</title>
-  <img class="logo" src="teys_logo.jpg">
   <meta name="order form Beef USA" content="The HTML5 Herald">
   <meta name="Luisa Salcedo" content="SitePoint">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
@@ -16,24 +15,25 @@
 
 <body>
   <main>
-    <h1 class="current-user"></h1>
+    <nav>
+        <a id="forgot_pass" href="#">Password help</a>
+        <a class="sign-up-link" href =#>Create a New User</a>
+    </nav>
     <!--Landing Page-->
     <section class="welcome" id="return">
       <p>Beef USA</p>
+      <img class="logo" src="teyslogo.jpg"/>
       <div class="box">
         <form>
           <label for="email"> Email: </label>
           <input placeholder="example@gmail.com" "text"><br>
+
           <label for="password"> Password:</label>
           <input placeholder="password"><br>
-          <a class="forgot_pass" href="#">Password help</a>
         </form>
       </div>
       <button class="log-in">Log in!</button>
-      <a class="sign-up-link" href =#>Create a New User</a>
-      <a class="administrator-link" href =#>Create New Order</a>
     </section>
-
 
      <!--Log In -->
 
@@ -55,15 +55,26 @@
     <!--Order Form-->
 
     <section class="order-form">
-      <form>
+      <form class="new-order">
         <label for="delivery"> Delivery date: </label>
-        <input placeholder="delivery date"><br>
+        <input class="delivery" placeholder="delivery date"><br>
         <label for="price"> Price: </label>
-        <input placeholder="Price"><br>
+        <input class="price" placeholder="Price"><br>
         <label for="cut">cut: </label>
-        <input placeholder="quantity"><br>
+        <input class="cut" placeholder="cut"><br>
+        <label for="quantity"> Quantity:</label>
+        <input class="quantity" placeholder="quantity"><br>
+        <button class="create-order">Create Order!</button>
       </form>
     </section>
+
+    <!--Completed Order-->
+
+    <section class="completed-order">
+      <div>
+        <ul class="completed-delivery"></ul>
+      </div>
+
 
     <!--Administrator landing page-->
 
@@ -73,7 +84,7 @@
         <input class=style placeholder="style"><br>
         <label for="weight">weight: </label>
         <input class=weight placeholder="weight"><br>
-      <button class="log-in">Create Cut!</button>      
+      <button class="link" id="log-in">Create Cut!</button>      
       </form>
     </section>
 
