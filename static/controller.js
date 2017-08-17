@@ -67,15 +67,13 @@ $(".new-order").on("submit", function() {
   Beef.createOrder({
     delivery: $(".delivery").val(),
     price: $(".price").val(),
-    cutId: $(".cut").val(),
+    cutId: $(".cut:/id").val(),
     quantity: $(".quantity").val()
-  })
-  .then(newOrder => {
-
+  }).then(order => {
+    Beef.state.currentPage = order;
+    Beef.state.currentPage = "order-form ";
   });
 });
-
-$(""//promise call back with then )
 
 $(".administrator-link").on("click", function() {
   Beef.state.currentPage = "administrator";
