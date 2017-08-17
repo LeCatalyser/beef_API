@@ -3,8 +3,8 @@ window.Beef = {};
 /* global Beef */
 
 Beef.state = {
-  //local copy of API objects
-  orders: [], //will download the data from server
+  //local copy of API objects-render what is in the database
+  orders: [], //will download the data from server-single source of truth
   cuts: [],
   users: [],
   currentPage: "welcome",

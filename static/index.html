@@ -8,95 +8,105 @@
   <title>Beef USA</title>
   <meta name="order form Beef USA" content="The HTML5 Herald">
   <meta name="Luisa Salcedo" content="SitePoint">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="main.css">
+  <link rel="icon" href="static/" </head>
 
-</head>
+  <body>
+    <main>
+      <nav>
+        <div>Menu</div>
+        <a class="forgot_pass horizontal show-log-out" href="#">Password Help</a>
+        <a class="sign-up-link horizontal  show-log-out" href=#>New User</a>
+        <a class="my-orders-link show-log-in" href="#">My Order Page</a>
+  
+      </nav>
+      <!--Landing Page-->
+      <section class="welcome" id="return">
+        <p>Beef USA</p>
+        <img class="logo" src="teyslogo.jpg" />
+        <div class="box">
+          <form>
+            <label for="email"> Email: </label>
+            <input placeholder="example@gmail.com" "text"><br>
 
-<body>
-  <main>
-    <nav>
-        <a id="forgot_pass" href="#">Password help</a>
-        <a class="sign-up-link" href =#>Create a New User</a>
-    </nav>
-    <!--Landing Page-->
-    <section class="welcome" id="return">
-      <p>Beef USA</p>
-      <img class="logo" src="teyslogo.jpg"/>
-      <div class="box">
-        <form>
-          <label for="email"> Email: </label>
-          <input placeholder="example@gmail.com" "text"><br>
+            <label for="password"> Password:</label>
+            <input placeholder="password"><br>
+          </form>
+        </div>
+        <button class="log-in">Log in!</button>
+      </section>
 
-          <label for="password"> Password:</label>
-          <input placeholder="password"><br>
+      <!--Log In -->
+
+      <section class="sign-up">
+        <p>Beef USA</p>
+        <div class="box">
+          <form>
+            <label for="email"> Email: </label>
+            <input class=email placeholder="example@gmail.com" "text"><br>
+
+            <label for="password"> Password:</label>
+            <input class=password placeholder="password"><br>
+          </form>
+        </div>
+        <button class="create-user">Create User!</button>
+      </section>
+
+
+      <!--Order Form-->
+
+      <section class="order-form box">
+        <form class="new-order">
+          <label for="delivery"> Delivery date: </label>
+          <input class="delivery" placeholder="Delivery date"><br>
+          <label for="price"> Price: </label>
+          <input class="price" placeholder="Price"><br>
+          <label for="cut">Cut: </label>
+          <input class="cut" placeholder="Cut"><br>
+          <label for="quantity"> Quantity:</label>
+          <input class="quantity" placeholder="Quantity"><br>
+          <button class="create-order">Create Order!</button>
         </form>
-      </div>
-      <button class="log-in">Log in!</button>
-    </section>
+      </section>
 
-     <!--Log In -->
 
-    <section class="sign-up">
-      <p>Beef USA</p>
-      <div class="box">
+      <!--Order View-->
+      <section class="my-orders box">
+
+      </section>
+
+      <!--Completed Order-->
+
+      <section class="new-order box">
+        <div>
+          <ul class="completed-delivery">Delivery:</ul>
+          <ul class="completed-price">Price:</ul>
+          <ul class="completed-cut">Cut:</ul>
+          <ul class="completed-quantity">Quantity:</ul>
+        </div>
+      </section>
+
+
+      <!--Administrator landing page-->
+
+      <section class="administrator">
         <form>
-          <label for="email"> Email: </label>
-          <input class=email placeholder="example@gmail.com" "text"><br>
-
-          <label for="password"> Password:</label>
-          <input class=password placeholder="password"><br>
+          <label for="style">style</label>
+          <input class=style placeholder="style"><br>
+          <label for="weight">weight: </label>
+          <input class=weight placeholder="weight"><br>
+          <button class="link" id="log-in">Create Cut!</button>
         </form>
-      </div>
-      <button class="create-user">Create User!</button>
-    </section>
+      </section>
 
+    </main>
 
-    <!--Order Form-->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script src="client_model.js"></script>
+    <script src="render.js"></script>
+    <script src="controller.js"></script>
+  </body>
 
-    <section class="order-form">
-      <form class="new-order">
-        <label for="delivery"> Delivery date: </label>
-        <input class="delivery" placeholder="delivery date"><br>
-        <label for="price"> Price: </label>
-        <input class="price" placeholder="Price"><br>
-        <label for="cut">cut: </label>
-        <input class="cut" placeholder="cut"><br>
-        <label for="quantity"> Quantity:</label>
-        <input class="quantity" placeholder="quantity"><br>
-        <button class="create-order">Create Order!</button>
-      </form>
-    </section>
-
-    <!--Completed Order-->
-
-    <section class="completed-order">
-      <div>
-        <ul class="completed-delivery"></ul>
-        
-      </div>
-
-
-    <!--Administrator landing page-->
-
-    <section class="administrator">
-      <form>
-        <label for="style">style</label>
-        <input class=style placeholder="style"><br>
-        <label for="weight">weight: </label>
-        <input class=weight placeholder="weight"><br>
-      <button class="link" id="log-in">Create Cut!</button>      
-      </form>
-    </section>
-
-
-  </main>
-
-  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-  <script src="client_model.js"></script>
-  <script src="render.js"></script>
-  <script src="controller.js"></script>
-</body>
-
-</html> 
+</html>

@@ -67,15 +67,22 @@ $(".new-order").on("submit", function() {
   Beef.createOrder({
     delivery: $(".delivery").val(),
     price: $(".price").val(),
-    cutId: $(".cut:/id").val(),
+    cutId: $(".cut").val(),
     quantity: $(".quantity").val()
   }).then(order => {
     Beef.state.currentPage = order;
-    Beef.state.currentPage = "order-form ";
+    Beef.state.currentPage = "new-order";
+    Beef.render(); //I'm guessing I can't see this until my databese is working?
   });
 });
 
+$(".my-orders-link").on("click", function() {
+  Beef.state.currentPage = "my-orders";
+  Beef.render();
+});
+
 $(".administrator-link").on("click", function() {
+  //need a promise
   Beef.state.currentPage = "administrator";
   Beef.render();
 });
