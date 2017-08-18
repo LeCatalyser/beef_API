@@ -1,25 +1,28 @@
 <!doctype html>
 
 <html lang="en">
-
+<link rel="icon" href="teyslogo.ico"/>
 <head>
   <meta charset="utf-8">
 
-  <title>Beef USA</title>
+  <title>TEYS USA</title>
   <meta name="order form Beef USA" content="The HTML5 Herald">
   <meta name="Luisa Salcedo" content="SitePoint">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="main.css">
-  <link rel="icon" href="static/" </head>
+ 
+</head>
 
   <body>
     <main>
       <nav>
-        <div>Menu</div>
-        <a class="forgot_pass horizontal show-log-out" href="#">Password Help</a>
-        <a class="sign-up-link horizontal  show-log-out" href=#>New User</a>
-        <a class="my-orders-link show-log-in" href="#">My Order Page</a>
-  
+        <div>
+          <p>Menu</p>
+        <li class="show-log-out"><a class= href="#">Password Help</a></li>        
+        <li class="show-log-out"><a class="sign-up-link horizontal" href=#>New User</a></li>
+        <li class="show-log-in"><a class="my-orders-link" href="#">My Order Page</a></li>
+        <li class="show-log-in"><a class="administrator-link" href="#">Administrator Page</a></li>
+        </div>
       </nav>
       <!--Landing Page-->
       <section class="welcome" id="return">
@@ -34,7 +37,7 @@
             <input placeholder="password"><br>
           </form>
         </div>
-        <button class="log-in">Log in!</button>
+        <button class="log-in">Log in</button>
       </section>
 
       <!--Log In -->
@@ -53,9 +56,7 @@
         <button class="create-user">Create User!</button>
       </section>
 
-
       <!--Order Form-->
-
       <section class="order-form box">
         <form class="new-order">
           <label for="delivery"> Delivery date: </label>
@@ -69,7 +70,6 @@
           <button class="create-order">Create Order!</button>
         </form>
       </section>
-
 
       <!--Order View-->
       <section class="my-orders box">
@@ -87,16 +87,16 @@
         </div>
       </section>
 
-
       <!--Administrator landing page-->
 
       <section class="administrator">
+        <div class="administrator-details">Administrator</div>
         <form>
-          <label for="style">style</label>
+          <label for="style">Style</label>
           <input class=style placeholder="style"><br>
-          <label for="weight">weight: </label>
+          <label for="weight">Weight: </label>
           <input class=weight placeholder="weight"><br>
-          <button class="link" id="log-in">Create Cut!</button>
+          <button class="new-cut-link" id="log-in">Create Cut</button>
         </form>
       </section>
 

@@ -13,14 +13,14 @@ Beef.render = () => {
     // hide the "you are logged out" links
     // show the "you are logged in" links
   } else {
-    $(".show-log-out").css("display", "inline");
+    $(".show-log-out").css("display", "block");
     $(".show-log-in").css("display", "none");
     // hide the "you are logged in" links
     // show the "you are logged out" links
   }
   $("log-in").css("display", "none");
   console.log(Beef.state);
-  $("." + Beef.state.currentPage).css("display", "inline");
+  $("." + Beef.state.currentPage).css("display", "block");
   const renderedOrders = Beef.state.orders
     .map(
       order => `
@@ -37,23 +37,23 @@ Beef.render = () => {
     <h3>Your Orders</h3>
     ${renderedOrders}
   `);
+  //To be used later on for User Administration Page
+  // const renderedUsers = Beef.state.users
+  //   .map(
+  //     user => `
+  //     <div>
+  //     ${user.email}
+  //     ${user.password}
+  //     </div>
+  //     `
+  //   )
+  //   .join("");
+  // $(".welcome").html(`
+  // <h4>Welcome</h4>
+  // ${renderedUsers}
+  // `);
 
-  const renderedUsers = Beef.state.renderedUsers
-    .map(
-      user => `
-      <div>
-      ${user.email}
-      ${user.password}
-      </div>
-      `
-    )
-    .join("");
-  $(".welcome").html(`
-  <h4>Welcome</h4>
-  ${renderedUsers}
-  `);
-
-  const renderedCuts = Beef.state.renederedCuts
+  const renderedCuts = Beef.state.cuts
     .map(
       cut => `
     <div>
@@ -63,9 +63,10 @@ Beef.render = () => {
     `
     )
     .join("");
-  $(".administrator").html(`
-  <h5>Inventory</h5>
-  ${renderedCuts}`);
+  $(".administrator-details").html(`
+    <h5>Inventory</h5>
+    ${renderedCuts}
+  `);
 
   //const renderCuts = Beef.state.cuts
   //Code 12-19 is per page. A page for orders, cuts, user

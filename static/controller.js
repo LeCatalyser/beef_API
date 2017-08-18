@@ -1,9 +1,7 @@
 /* global Beef */
 /* global $ */
 //All info in this file is about user clicking the page or submitting information.
-$(".make-cut").on("click", e => {
-  //user did something is controller logic.
-});
+$(".make-cut").on("click", e => {});
 
 $(".make-order").on("click", e => {});
 
@@ -24,14 +22,21 @@ $(".create-user").on("click", e => {
   });
 });
 
-$(".administrator").on("click", e => {
+$(".new-cut-link").on("click", e => {
   Beef.createCuts({
     style: $(".style").val(),
     weight: $(".weight").val()
-  }).then(order => {
-    Beef.state.currentCut = order;
-    Beef.render();
-  });
+  })
+    .then(cut => {
+      $(".style").val("");
+      $(".weight").val("");
+      Beef.state.currentCut = cut;
+      Beef.render();
+      return Beef.getCuts();
+    })
+    .then(() => {
+      Beef.render();
+    });
 });
 
 $(function() {
