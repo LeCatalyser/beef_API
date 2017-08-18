@@ -38,7 +38,7 @@ Beef.render = () => {
     ${renderedOrders}
   `);
 
-  const renderUsers = Beef.state.renderUsers
+  const renderedUsers = Beef.state.renderedUsers
     .map(
       user => `
       <div>
@@ -50,8 +50,22 @@ Beef.render = () => {
     .join("");
   $(".welcome").html(`
   <h4>Welcome</h4>
-  ${renderUsers}
+  ${renderedUsers}
   `);
+
+  const renderedCuts = Beef.state.renederedCuts
+    .map(
+      cut => `
+    <div>
+    ${cut.style}
+    ${cut.weight}
+    </div>
+    `
+    )
+    .join("");
+  $(".administrator").html(`
+  <h5>Inventory</h5>
+  ${renderedCuts}`);
 
   //const renderCuts = Beef.state.cuts
   //Code 12-19 is per page. A page for orders, cuts, user
