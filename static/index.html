@@ -5,8 +5,8 @@
 <head>
   <meta charset="utf-8">
 
-  <title>TEYS USA</title>
-  <meta name="order form Beef USA" content="The HTML5 Herald">
+  <title>TEYS USA Order Form</title>
+  <meta name="Order form Teys USA" content="The HTML5 Herald">
   <meta name="Luisa Salcedo" content="SitePoint">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="main.css">
@@ -17,46 +17,53 @@
     <main>
       <nav>
         <div>
-          <p>Menu</p>
         <li class="show-log-out"><a class= href="#">Password Help</a></li>        
         <li class="show-log-out"><a class="sign-up-link horizontal" href=#>New User</a></li>
-        <li class="show-log-in"><a class="my-orders-link" href="#">My Order Page</a></li>
-        <li class="show-log-in"><a class="administrator-link" href="#">Administrator Page</a></li>
+        <li class="show-log-in"><a class="#">Log Out</a></li>
         </div>
       </nav>
-      <!--Landing Page-->
+
+      <!--Log In Page-->
       <section class="welcome" id="return">
-        <p>Beef USA</p>
-        <img class="logo" src="teyslogo.jpg" />
-        <div class="box">
-          <form>
-            <label for="email"> Email: </label>
-            <input placeholder="example@gmail.com" "text"><br>
+          <p>Beef USA</p>
+          <img class="logo" src="teyslogo.jpg" />
+          <div class="box">
+            <form>
+              <label for="email"> Email: </label>
+              <input placeholder="example@gmail.com" "text"><br>
+  
+              <label for="password"> Password:</label>
+              <input placeholder="password"><br>
+            </form>
+          </div>
+          <button class="log-in">Log in</button>
+        </section>
 
-            <label for="password"> Password:</label>
-            <input placeholder="password"><br>
-          </form>
-        </div>
-        <button class="log-in">Log in</button>
-      </section>
-
-      <!--Log In -->
+        <!--Create New User Page -->
 
       <section class="sign-up">
-        <p>Beef USA</p>
-        <div class="box">
-          <form>
-            <label for="email"> Email: </label>
-            <input class=email placeholder="example@gmail.com" "text"><br>
-
-            <label for="password"> Password:</label>
-            <input class=password placeholder="password"><br>
-          </form>
-        </div>
-        <button class="create-user">Create User!</button>
+          <p>Beef USA</p>
+          <div class="box">
+            <form>
+              <label for="email"> Email: </label>
+              <input class=email placeholder="example@gmail.com" "text"><br>
+  
+              <label for="password"> Password:</label>
+              <input class=password placeholder="password"><br>
+            </form>
+          </div>
+          <button class="create-user">Create User!</button>
+        </section>
+  
+     <!--Landing Page-->
+      <section>
+      <h1>Menu</h1>
+        <li class="show-log-in"><a class="my-orders-link" href="#">My Order Page</a></li>
+        <li class="show-log-in"><a class="administrator-link" href="#">Administrator Page</a></li>
+        <li class="show-log-in"><a class="new-order-link" href="#">Create a New Order</a></li>
       </section>
 
-      <!--Order Form-->
+      <!--Order Form Page-->
       <section class="order-form box">
         <form class="new-order">
           <label for="delivery"> Delivery date: </label>
@@ -71,7 +78,7 @@
         </form>
       </section>
 
-      <!--Order View-->
+      <!--New Order View-->
       <section class="my-orders box">
 
       </section>
