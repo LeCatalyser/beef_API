@@ -1,7 +1,9 @@
 
 nav {
   margin-top: 20px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Space Mono', monospace;
+  width: 150px;
+  padding: 15px;
 }
 
 .horizontal{
@@ -57,7 +59,7 @@ label{
 .link {
   text-decoration: none;
 }
-#return
+.return
 {
    background: #006bb7;
 }
@@ -130,8 +132,8 @@ input::-webkit-input-placeholder{
   text-align: center;
 }
 
-@media only screen and (min-width: 800px) {
-  //* {
+* @media only screen and (min-width: 800px) {
+  * {
     width: 100%;
   }
     
@@ -140,4 +142,4 @@ input::-webkit-input-placeholder{
       width: 100%;
     }
 @media only screen and (max-device-width: 480px)
-  }
+  } *

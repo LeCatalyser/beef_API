@@ -68,6 +68,12 @@ Beef.render = () => {
     ${renderedCuts}
   `);
 
+  // if (renderedOrders){
+  //   $//user doesn't input the email or password, it should go red
+  // }
+  //   $Beef.state.orders);
+  // then();
+
   //const renderCuts = Beef.state.cuts
   //Code 12-19 is per page. A page for orders, cuts, user
   //$(".my-orders").html(JSON.stringify(Beef.state.orders));

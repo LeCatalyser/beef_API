@@ -91,3 +91,8 @@ $(".administrator-link").on("click", function() {
   Beef.state.currentPage = "administrator";
   Beef.render();
 });
+
+$(".log-out-link").on("click", function() {
+  Beef.state.currentPage = "sign-up";
+  Beef.render();
+});

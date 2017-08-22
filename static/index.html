@@ -1,7 +1,8 @@
 <!doctype html>
 
 <html lang="en">
-<link rel="icon" href="teyslogo.ico"/>
+<link rel="icon" href="teyslogo.ico" />
+
 <head>
   <meta charset="utf-8">
 
@@ -10,110 +11,112 @@
   <meta name="Luisa Salcedo" content="SitePoint">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link rel="stylesheet" href="main.css">
- 
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+
 </head>
 
-  <body>
-    <main>
-      <nav>
-        <div>
-        <li class="show-log-out"><a class= href="#">Password Help</a></li>        
-        <li class="show-log-out"><a class="sign-up-link horizontal" href=#>New User</a></li>
-        <li class="show-log-in"><a class="#">Log Out</a></li>
-        </div>
-      </nav>
+<body>
+  <main>
+    <nav>
+      <div>
+        <li class="show-log-out menu"><a class="pass-word-help" href="#">Password Help</a></li>
+        <li class="show-log-out menu"><a class="sign-up-link" href="#">New User</a></li>
+        <li class="show-log-in menu"><a class="log-out-link" href="#">Log Out</a></li>
+        <button>Log Out</button>
+      </div>
+    </nav>
 
-      <!--Log In Page-->
-      <section class="welcome" id="return">
-          <p>Beef USA</p>
-          <img class="logo" src="teyslogo.jpg" />
-          <div class="box">
-            <form>
-              <label for="email"> Email: </label>
-              <input placeholder="example@gmail.com" "text"><br>
-  
-              <label for="password"> Password:</label>
-              <input placeholder="password"><br>
-            </form>
-          </div>
-          <button class="log-in">Log in</button>
-        </section>
-
-        <!--Create New User Page -->
-
-      <section class="sign-up">
-          <p>Beef USA</p>
-          <div class="box">
-            <form>
-              <label for="email"> Email: </label>
-              <input class=email placeholder="example@gmail.com" "text"><br>
-  
-              <label for="password"> Password:</label>
-              <input class=password placeholder="password"><br>
-            </form>
-          </div>
-          <button class="create-user">Create User!</button>
-        </section>
-  
-     <!--Landing Page-->
-      <section>
-      <h1>Menu</h1>
-        <li class="show-log-in"><a class="my-orders-link" href="#">My Order Page</a></li>
-        <li class="show-log-in"><a class="administrator-link" href="#">Administrator Page</a></li>
-        <li class="show-log-in"><a class="new-order-link" href="#">Create a New Order</a></li>
-      </section>
-
-      <!--Order Form Page-->
-      <section class="order-form box">
-        <form class="new-order">
-          <label for="delivery"> Delivery date: </label>
-          <input class="delivery" placeholder="Delivery date"><br>
-          <label for="price"> Price: </label>
-          <input class="price" placeholder="Price"><br>
-          <label for="cut">Cut: </label>
-          <input class="cut" placeholder="Cut"><br>
-          <label for="quantity"> Quantity:</label>
-          <input class="quantity" placeholder="Quantity"><br>
-          <button class="create-order">Create Order!</button>
-        </form>
-      </section>
-
-      <!--New Order View-->
-      <section class="my-orders box">
-
-      </section>
-
-      <!--Completed Order-->
-
-      <section class="new-order box">
-        <div>
-          <ul class="completed-delivery">Delivery:</ul>
-          <ul class="completed-price">Price:</ul>
-          <ul class="completed-cut">Cut:</ul>
-          <ul class="completed-quantity">Quantity:</ul>
-        </div>
-      </section>
-
-      <!--Administrator landing page-->
-
-      <section class="administrator">
-        <div class="administrator-details">Administrator</div>
+    <!--Log In Page-->
+    <section class="welcome return">
+      <p>Beef USA</p>
+      <img class="logo" src="teyslogo.jpg"/>
+      <div class="box">
         <form>
-          <label for="style">Style</label>
-          <input class=style placeholder="style"><br>
-          <label for="weight">Weight: </label>
-          <input class=weight placeholder="weight"><br>
-          <button class="new-cut-link" id="log-in">Create Cut</button>
+          <label for="email"> Email: </label>
+          <input placeholder="example@gmail.com" "text"><br>
+
+          <label for="password"> Password:</label>
+          <input placeholder="password"><br>
         </form>
-      </section>
+      </div>
+      <button class="log-in">Log in</button>
+    </section>
 
-    </main>
+    <!--Create New User Page -->
 
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
-    <script src="client_model.js"></script>
-    <script src="render.js"></script>
-    <script src="controller.js"></script>
-  </body>
+    <section class="sign-up">
+      <p>Beef USA</p>
+      <div class="box">
+        <form>
+          <label for="email"> Email: </label>
+          <input class=email placeholder="example@gmail.com" "text"><br>
+
+          <label for="password"> Password:</label>
+          <input class=password placeholder="password"><br>
+        </form>
+      </div>
+      <button class="create-user">Create User!</button>
+    </section>
+
+    <!--Landing Page-->
+    <section>
+      <h1>Menu</h1>
+      <li class="show-log-in"><a class="my-orders-link" href="#">My Order Page</a></li>
+      <li class="show-log-in"><a class="administrator-link" href="#">Administrator Page</a></li>
+      <li class="show-log-in"><a class="new-order-link" href="#">Create a New Order</a></li>
+    </section>
+
+    <!--Order Form Page-->
+    <section class="order-form return box">
+      <form class="new-order">
+        <label for="delivery"> Delivery date: </label>
+        <input class="delivery" placeholder="Delivery date"><br>
+        <label for="price"> Price: </label>
+        <input class="price" placeholder="Price"><br>
+        <label for="cut">Cut: </label>
+        <input class="cut" placeholder="Cut"><br>
+        <label for="quantity"> Quantity:</label>
+        <input class="quantity" placeholder="Quantity"><br>
+        <button class="create-order">Create Order!</button>
+      </form>
+    </section>
+
+    <!--New Order View-->
+    <section class="my-orders box">
+
+    </section>
+
+    <!--Completed Order-->
+
+    <section class="new-order box">
+      <div>
+        <ul class="completed-delivery">Delivery:</ul>
+        <ul class="completed-price">Price:</ul>
+        <ul class="completed-cut">Cut:</ul>
+        <ul class="completed-quantity">Quantity:</ul>
+      </div>
+    </section>
+
+    <!--Administrator landing page-->
+
+    <section class="administrator">
+      <div class="administrator-details">Administrator</div>
+      <form>
+        <label for="style">Style</label>
+        <input class=style placeholder="style"><br>
+        <label for="weight">Weight: </label>
+        <input class=weight placeholder="weight"><br>
+        <button class="new-cut-link" id="log-in">Create Cut</button>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="client_model.js"></script>
+  <script src="render.js"></script>
+  <script src="controller.js"></script>
+</body>
 
 </html>
