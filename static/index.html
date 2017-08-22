@@ -22,7 +22,6 @@
         <li class="show-log-out menu"><a class="pass-word-help" href="#">Password Help</a></li>
         <li class="show-log-out menu"><a class="sign-up-link" href="#">New User</a></li>
         <li class="show-log-in menu"><a class="log-out-link" href="#">Log Out</a></li>
-        <button>Log Out</button>
       </div>
     </nav>
 
@@ -32,11 +31,11 @@
       <img class="logo" src="teyslogo.jpg"/>
       <div class="box">
         <form>
-          <label for="email"> Email: </label>
-          <input placeholder="example@gmail.com" "text"><br>
+          <label for="log-in-email"> Email: </label>
+          <input class="log-in-email" placeholder="example@gmail.com" "text"><br>
 
-          <label for="password"> Password:</label>
-          <input placeholder="password"><br>
+          <label for="log-in-password"> Password:</label>
+          <input class="log-in-password" placeholder="password"><br>
         </form>
       </div>
       <button class="log-in">Log in</button>
@@ -59,7 +58,7 @@
     </section>
 
     <!--Landing Page-->
-    <section>
+    <section class="landing-page">
       <h1>Menu</h1>
       <li class="show-log-in"><a class="my-orders-link" href="#">My Order Page</a></li>
       <li class="show-log-in"><a class="administrator-link" href="#">Administrator Page</a></li>
@@ -70,13 +69,13 @@
     <section class="order-form return box">
       <form class="new-order">
         <label for="delivery"> Delivery date: </label>
-        <input class="delivery" placeholder="Delivery date"><br>
+        <input required class="delivery" placeholder="Delivery date"><br>
         <label for="price"> Price: </label>
-        <input class="price" placeholder="Price"><br>
+        <input required class="price" placeholder="Price"><br>
         <label for="cut">Cut: </label>
-        <input class="cut" placeholder="Cut"><br>
+        <input required class="cut" placeholder="Cut"><br>
         <label for="quantity"> Quantity:</label>
-        <input class="quantity" placeholder="Quantity"><br>
+        <input required class="quantity" placeholder="Quantity"><br>
         <button class="create-order">Create Order!</button>
       </form>
     </section>

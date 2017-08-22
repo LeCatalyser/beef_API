@@ -52,6 +52,7 @@ Beef.getUsers = () => {
     .then(users => {
       console.log(users);
       Beef.state.users = users;
+      return users;
     });
 };
 

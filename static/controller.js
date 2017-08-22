@@ -58,9 +58,24 @@ $(".welcome-link").on("click", function() {
 });
 
 $(".log-in").on("click", function() {
-  Beef.state.currentPage = "log-in";
-  Beef.state.currentPage = "order-form";
+  // Beef.state.currentPage = "landing-page";
   Beef.render();
+
+  Beef.getUsers().then(users => {
+    console.log(users);
+    //alert("User not found");
+    const correctEmail = $(".log-in-email").val(); //how we get user out of input element
+    const user = users.find(user => {
+      return user.email === correctEmail;
+    });
+    if (user) {
+      Beef.state.currentPage = "landing-page";
+      Beef.state.currentUser = user;
+      Beef.render();
+    } else {
+      alert("User doesn't exist");
+    }
+  });
 });
 
 $(".order-form-link").on("click", function() {
