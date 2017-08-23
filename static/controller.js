@@ -17,7 +17,7 @@ $(".create-user").on("click", e => {
     password: $(".password").val()
   }).then(user => {
     Beef.state.currentUser = user;
-    Beef.state.currentPage = "order-form";
+    Beef.state.currentPage = "landing-page";
     Beef.render();
   });
 });
@@ -91,12 +91,12 @@ $(".new-order").on("submit", function() {
     quantity: $(".quantity").val()
   }).then(order => {
     Beef.state.currentPage = order;
-    Beef.state.currentPage = "new-order";
+    Beef.state.currentPage = "order-form";
     Beef.render(); //I'm guessing I can't see this until my databese is working?
   });
 });
 
-$(".my-orders-link").on("click", function() {
+$(".landing-page").on("click", function() {
   Beef.state.currentPage = "my-orders";
   Beef.render();
 });
@@ -108,6 +108,11 @@ $(".administrator-link").on("click", function() {
 });
 
 $(".log-out-link").on("click", function() {
-  Beef.state.currentPage = "sign-up";
+  Beef.state.currentPage = "welcome";
+  Beef.render();
+});
+
+$(".landing-page").on("click", function() {
+  Beef.state.currentPage = "order-form";
   Beef.render();
 });
