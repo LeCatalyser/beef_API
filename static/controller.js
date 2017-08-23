@@ -72,6 +72,8 @@ $(".log-in").on("click", function() {
       Beef.state.currentPage = "landing-page";
       Beef.state.currentUser = user;
       Beef.render();
+      $(".log-in-email").val("");
+      $(".log-in-password").val("");
     } else {
       alert("User doesn't exist");
     }
@@ -96,7 +98,12 @@ $(".new-order").on("submit", function() {
   });
 });
 
-$(".landing-page").on("click", function() {
+$(".create-order").on("click", function(e) {
+  console.log("invalid?");
+  $(e.currentTarget).parent().addClass("submit");
+});
+
+$(".my-orders-link").on("click", function() {
   Beef.state.currentPage = "my-orders";
   Beef.render();
 });
@@ -112,7 +119,7 @@ $(".log-out-link").on("click", function() {
   Beef.render();
 });
 
-$(".landing-page").on("click", function() {
+$(".new-order-link").on("click", function() {
   Beef.state.currentPage = "order-form";
   Beef.render();
 });
