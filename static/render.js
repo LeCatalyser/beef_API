@@ -37,6 +37,7 @@ Beef.render = () => {
     <h3>Your Orders</h3>
     ${renderedOrders}
   `);
+  //complete how I want the order to look.
   //To be used later on for User Administration Page
   // const renderedUsers = Beef.state.users
   //   .map(

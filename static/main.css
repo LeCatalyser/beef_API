@@ -132,6 +132,10 @@ input::-webkit-input-placeholder{
   text-align: center;
 }
 
+.menu {
+  text-align: center;
+}
+
 * @media only screen and (min-width: 800px) {
   * {
     width: 100%;
