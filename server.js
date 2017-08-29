@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const app = express();
-app.use(express.static("static")) //I am telling my back end to serve files from this directory
+app.use(express.static("static")); //I am telling my back end to serve files from this directory
 
 app.use(morgan("dev")); //registering morgan as a middlware function
 app.use(bodyParser.json());
@@ -149,9 +149,11 @@ app.post("/Orders", (req, res) => {
 });
 
 app.delete("/orders/:id", (req, res) => {
+  console.log(req.params.id);
   Order.findByIdAndRemove(req.params.id)
     .exec()
-    .then(() => {
+    .then(data => {
+      console.log(data);
       res.status(204).json({ message: "Order has been deleted" });
     })
     .catch(err => {

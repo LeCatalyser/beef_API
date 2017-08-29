@@ -89,13 +89,17 @@ $(".new-order").on("submit", function() {
   Beef.createOrder({
     delivery: $(".delivery").val(),
     price: $(".price").val(),
-    cutId: $(".cut").val(),
+    cutId: $(".select-cut").val(),
     quantity: $(".quantity").val()
-  }).then(order => {
-    Beef.state.currentPage = order;
-    Beef.state.currentPage = "my-orders";
-    Beef.render(); //I'm guessing I can't see this until my databese is working?
-  });
+  })
+    .then(order => {
+      Beef.state.currentPage = order;
+      Beef.state.currentPage = "my-orders";
+      return Beef.getOrders(); //I'm guessing I can't see this until my databese is working?
+    })
+    .then(() => {
+      Beef.render(); //be asyncronous
+    });
 });
 
 $(".create-order").on("click", function(e) {
@@ -122,5 +126,33 @@ $(".log-out-link").on("click", function() {
 
 $(".new-order-link").on("click", function() {
   Beef.state.currentPage = "order-form";
+  Beef.render();
+});
+
+$(".landing-page-link").on("click", function() {
+  Beef.state.currentPage = "welcome";
+  Beef.render();
+});
+//need event delegation
+$("body").on("click", "button.delete-order", function(e) {
+  const orderId = $(e.currentTarget).attr("order-id");
+  Beef.state.currentOrder = "order-form";
+  Beef.deleteOrder(orderId)
+    .then(function() {
+      return Beef.getOrders(); //promise chain
+      //when it gets back to me render results to page
+    })
+    .then(function() {
+      Beef.render();
+    });
+});
+
+$(".password-help-link").on("click", function() {
+  Beef.state.currentPage = "forgotten-password";
+  Beef.render();
+});
+
+$(".password-help").on("click", function() {
+  Beef.state.currentPage = "check-email";
   Beef.render();
 });

@@ -9,7 +9,7 @@ Beef.render = () => {
   if (Beef.state.currentUser) {
     $(".current-user").html(Beef.state.currentUser.email);
     $(".show-log-out").css("display", "none");
-    $(".show-log-in").css("display", "inline");
+    $(".show-log-in").css("display", "block");
     // hide the "you are logged out" links
     // show the "you are logged in" links
   } else {
@@ -21,17 +21,40 @@ Beef.render = () => {
   $("log-in").css("display", "none");
   console.log(Beef.state);
   $("." + Beef.state.currentPage).css("display", "block");
+  // const bar = () => {
+  //   return "foo";
+  // }
+  // const bar = () => "foo";
   const renderedOrders = Beef.state.orders
-    .map(
-      order => `
-      <div>
-        ${order.id}
-        ${order.price}
-        ${order.delivery}
-      </div>
-    `
+    .map(order => {
+      //loop
+      const cutId = order.cutId;
+      let cutStyle; //saves the style
+      Beef.state.cuts.forEach(cut => {
+        //blockscoped
+        if (cutId === cut.id) {
+          cutStyle = cut.style;
+        }
+      });
+      return `
+        <div>
+          Pending Orders
+        </div>
+        <div>
+          ${cutStyle}
+        </div>
+        <div>
+          ${order.price} 
+        </div>
+        <div>
+          ${order.delivery} 
+        </div>
+        <div>
+          <button order-id="${order.id}" class="delete-order">Delete Order</button>
+        </div>
+      `;
       //add clases or table if wanted
-    )
+    })
     .join("");
   $(".my-orders").html(`
     <h3>Your Orders</h3>
@@ -68,6 +91,17 @@ Beef.render = () => {
     <h5>Inventory</h5>
     ${renderedCuts}
   `);
+
+  $(".select-cut").html(
+    Beef.state.cuts.map(cut => {
+      //cut.id info for back end purposes, cut.style for user purposes
+      return `
+  <option value="${cut.id}">
+  ${cut.style}
+  </option>
+  `;
+    })
+  );
 
   // if (renderedOrders){
   //   $//user doesn't input the email or password, it should go red

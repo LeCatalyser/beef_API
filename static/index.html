@@ -19,9 +19,10 @@
   <main>
     <nav>
       <div>
-        <li class="show-log-out menu"><a class="pass-word-help" href="#">Password Help</a></li>
+        <li class="show-log-out menu"><a class="password-help-link" href="#">Password Help</a></li>
         <li class="show-log-out menu"><a class="sign-up-link" href="#">New User</a></li>
         <li class="show-log-in menu"><a class="log-out-link" href="#">Log Out</a></li>
+        <li class="show-log-out menu"><a class="landing-page-link" href="#">Home Page</a></li>
       </div>
     </nav>
 
@@ -71,7 +72,9 @@
         <label for="price"> Price: </label>
         <input required class="price" placeholder="Price"><br>
         <label for="cut">Cut: </label>
-        <input required class="cut" placeholder="Cut"><br>
+        <div>
+          <select class="select-cut"></select>
+        </div>
         <label for="quantity"> Quantity:</label>
         <input required class="quantity" placeholder="Quantity"><br>
         <button class="create-order">Create Order!</button>
@@ -97,15 +100,30 @@
     <!--Administrator landing page-->
 
     <section class="administrator">
-      <div class=" dropdown administrator-details">Administrator</div>
+      <div class="administrator-details">Administrator</div>
       <form>
         <label for="style">Style</label>
         <input class=style placeholder="style"><br>
-        <label for="weight">Weight: </label>
+        <label for="weight">Weight:</label>
         <input class=weight placeholder="weight"><br>
         <button class="new-cut-link" id="log-in">Create Cut</button>
       </form>
     </section>
+
+    <!--Password Help -->
+    
+    <section class="forgotten-password">
+      <form>
+        <label for="forgotten-email">What's your email?</label>
+        <input class=forgotten-email placeholder="forgotten-email">
+        <button class="password-help">Reset Password</button>
+      </form>
+    </section>
+
+  <!--Check your email -->
+
+  <section class="check-email">
+    <p>Check your email with in 24 hours!</p>
 
   </main>
 

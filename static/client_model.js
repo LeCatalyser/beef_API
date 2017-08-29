@@ -146,7 +146,7 @@ Beef.putOrder = modifyOrder => {
     });
 };
 
-// DELETE /orders/5unpqiweunfiq/Remember delete doesn't have a body bc working with specific id
+// DELETE /orders/Remember delete doesn't have a body bc working with specific id
 Beef.deleteOrder = orderId => {
   return fetch(`/orders/${orderId}`, {
     method: "DELETE"
