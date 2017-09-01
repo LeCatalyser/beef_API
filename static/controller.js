@@ -60,7 +60,7 @@ $(".welcome-link").on("click", function() {
 $(".log-in").on("click", function() {
   // Beef.state.currentPage = "landing-page";
   Beef.render();
-
+  //need beef.log in to very credentials.
   Beef.getUsers().then(users => {
     console.log(users);
     //alert("User not found");
@@ -154,5 +154,10 @@ $(".password-help-link").on("click", function() {
 
 $(".password-help").on("click", function() {
   Beef.state.currentPage = "check-email";
+  Beef.render();
+});
+
+$(".home-page-link").on("click", function() {
+  Beef.state.currentPage = "landing-page";
   Beef.render();
 });

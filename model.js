@@ -1,5 +1,6 @@
 //data layer ( database) of the application
 const mongoose = require("mongoose"); //cooks my order. Mongo will be my single source of truth
+const bcrypt = require("bcryptjs");
 
 const cutSchema = mongoose.Schema({
   style: String,
@@ -54,6 +55,10 @@ userSchema.methods.apiRepr = function() {
     id: this._id,
     email: this.email
   };
+};
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
 };
 
 const Cut = mongoose.model("Cut", cutSchema);

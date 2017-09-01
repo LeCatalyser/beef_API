@@ -1,4 +1,5 @@
 
+
 nav {
   margin-top: 20px;
   font-family: 'Space Mono', monospace;
@@ -42,10 +43,15 @@ html{
 html, body, main {
   width: 100%;
   height: 100%;
+  font-family: 'Open Sans', sans-serif;
 }
 main{
   display: flex;
   flex-direction: column;
+}
+
+.your-orders{
+  text-align: center;
 }
 
 p{
@@ -120,6 +126,10 @@ button, .create-user
   border-radius: 5px;
   color: #fff;
   
+}
+
+.select-cut {
+  margin: 20px;
 }
 form
 {

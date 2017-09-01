@@ -11,6 +11,15 @@ Beef.state = {
   currentUser: null
 };
 
+Beef.logIn = (email, password) => {
+  return fetch("/login", {
+    methond: "POST",
+    headers: {
+      Authorization: "Basic " + btoa(email + ":" + password)
+    } //call it from when I log in
+  });
+};
+
 Beef.getOrders = () => {
   //make one of these per endpoint
   return fetch("/orders", {
