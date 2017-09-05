@@ -63,7 +63,7 @@ passport.use(basicStrategy);
 
 app.post(
   "/login",
-  passport.authenticate("basic", { session: false }),
+  passport.authenticate("basic", { session: false }), //basic http authentication
   (req, res) => {
     res.sendStatus(200);
   }
