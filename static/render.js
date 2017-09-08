@@ -1,5 +1,6 @@
 /* global Beef */
 /* global $ */
+/* global moment */
 //it has downloaded orders and keept them in the State
 
 Beef.render = () => {
@@ -47,7 +48,7 @@ Beef.render = () => {
           ${order.price} 
         </div>
         <div>
-          ${order.delivery} 
+          ${moment(order.delivery).format("MM/DD/YYYY")} 
         </div>
         <div>
           <button order-id="${order.id}" class="delete-order">Delete Order</button>
@@ -57,7 +58,7 @@ Beef.render = () => {
     })
     .join("");
   $(".my-orders").html(`
-    <h3>Your Orders</h3>
+    <h3 class="your-orders">Your Orders</h3>
     ${renderedOrders}
   `);
   //complete how I want the order to look.

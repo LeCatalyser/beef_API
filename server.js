@@ -1,10 +1,13 @@
 const express = require("express"); //how we make express available to application code
 const morgan = require("morgan"); //logging middleware
 const bodyParser = require("body-parser");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs"); //to not store plain passwords in database
 const mongoose = require("mongoose");
 const app = express();
+const passport = require("passport");
+const { BasicStrategy } = require("passport-http");
 app.use(express.static("static")); //I am telling my back end to serve files from this directory
+const { Cut, Order, User } = require("./model");
 
 app.use(morgan("dev")); //registering morgan as a middlware function
 app.use(bodyParser.json());
@@ -25,11 +28,52 @@ const { DATABASE_URL, PORT } = require("./config");
 // const DATABASE_URL = config.DATABSE_URL;
 // const PORT = config.PORT;
 
+const basicStrategy = new BasicStrategy((email, password, callback) => {
+  let user; //particular user
+  User.findOne({ email: email }) //uppercase refers to universal users
+    .then(_user => {
+      user = _user;
+      if (!user) {
+        return Promise.reject({
+          reason: "LoginError",
+          message: "Incorrect username or password"
+        });
+      }
+      return user.validatePassword(password);
+    })
+    .then(isValid => {
+      if (!isValid) {
+        return Promise.reject({
+          reason: "LoginError",
+          message: "Incorrect username or password"
+        });
+      }
+      return callback(null, user);
+    })
+    .catch(err => {
+      console.log(err);
+      if (err.reason === "LoginError") {
+        return callback(null, false, err);
+      }
+      return callback(err, false);
+    });
+});
+
+app.use(passport.initialize());
+passport.use(basicStrategy);
+
+app.post(
+  "/login",
+  passport.authenticate("basic", { session: false }), //basic http authentication
+  (req, res) => {
+    res.sendStatus(200);
+  }
+);
+
 ////////////////////////////////////////////////////
 // CUTS
 ////////////////////////////////////////////////////
 
-const { Cut, Order, User } = require("./model");
 app.get("/Cuts", (req, res) => {
   Cut.find()
     .exec() //tell mongo function to quick off and start running
