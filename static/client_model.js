@@ -13,10 +13,15 @@ Beef.state = {
 
 Beef.logIn = (email, password) => {
   return fetch("/login", {
-    methond: "POST",
+    method: "POST",
     headers: {
       Authorization: "Basic " + btoa(email + ":" + password)
     } //call it from when I log in
+  }).then(res => {
+    console.log(res);
+    if (res.status !== 200) {
+      throw new Error("password is incorrect");
+    }
   });
 };
 

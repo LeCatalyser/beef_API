@@ -32,7 +32,7 @@ const basicStrategy = new BasicStrategy((email, password, callback) => {
   let user; //particular user
   User.findOne({ email: email }) //uppercase refers to universal users
     .then(_user => {
-      user = user;
+      user = _user;
       if (!user) {
         return Promise.reject({
           reason: "LoginError",
@@ -51,6 +51,7 @@ const basicStrategy = new BasicStrategy((email, password, callback) => {
       return callback(null, user);
     })
     .catch(err => {
+      console.log(err);
       if (err.reason === "LoginError") {
         return callback(null, false, err);
       }

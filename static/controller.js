@@ -61,23 +61,32 @@ $(".log-in").on("click", function() {
   // Beef.state.currentPage = "landing-page";
   Beef.render();
   //need beef.log in to very credentials.
-  Beef.getUsers().then(users => {
-    console.log(users);
-    //alert("User not found");
-    const correctEmail = $(".log-in-email").val(); //how we get user out of input element
-    const user = users.find(user => {
-      return user.email === correctEmail;
+  const email = $(".log-in-email").val();
+  const password = $(".log-in-password").val();
+  Beef.logIn(email, password)
+    .then(() => {
+      return Beef.getUsers();
+    })
+    .then(users => {
+      console.log(users);
+      //alert("User not found");
+      const correctEmail = $(".log-in-email").val(); //how we get user out of input element
+      const user = users.find(user => {
+        return user.email === correctEmail;
+      });
+      if (user) {
+        Beef.state.currentPage = "landing-page";
+        Beef.state.currentUser = user;
+        Beef.render();
+        $(".log-in-email").val("");
+        $(".log-in-password").val("");
+      } else {
+        alert("User doesn't exist");
+      }
+    })
+    .catch(err => {
+      alert(err.message);
     });
-    if (user) {
-      Beef.state.currentPage = "landing-page";
-      Beef.state.currentUser = user;
-      Beef.render();
-      $(".log-in-email").val("");
-      $(".log-in-password").val("");
-    } else {
-      alert("User doesn't exist");
-    }
-  });
 });
 
 $(".order-form-link").on("click", function() {
