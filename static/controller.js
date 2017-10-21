@@ -122,7 +122,6 @@ $(".my-orders-link").on("click", function() {
 });
 
 $(".administrator-link").on("click", function() {
-  //need a promise
   Beef.state.currentPage = "administrator";
   Beef.render();
 });
